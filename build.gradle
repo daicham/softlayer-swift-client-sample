@@ -1,0 +1,34 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+// Project information
+version = '0.0.1-SNAPSHOT'
+
+// User Defined Dynamic Properties
+ext {
+    javaVersion = 1.8
+    defaultEncoding = 'UTF-8'
+    jcloudVersion = '1.9.2'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    //compile 'org.slf4j:slf4j-api:1.7.13'
+    compile "org.apache.jclouds.provider:softlayer:${jcloudVersion}"
+    compile "org.apache.jclouds.driver:jclouds-slf4j:${jcloudVersion}"
+    compile "org.apache.jclouds.api:openstack-swift:${jcloudVersion}"
+//    compile "org.apache.jclouds:jclouds-all:${jcloudVersion}"
+    compile "ch.qos.logback:logback-classic:1.0.13"
+
+    testCompile 'junit:junit:4.12'
+}
+
+// Compile Settings
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+[compileJava, compileTestJava]*.options*.encoding = defaultEncoding
+
+mainClassName = 'SoftLayerClientSample'
